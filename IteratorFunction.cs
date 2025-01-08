@@ -76,31 +76,26 @@ namespace WhiteCrow
         var result = await context.CallActivityAsync<string>(nameof(Iterator_Work), chuck);
         outputs.Add(result);
 
-        var status = new OrchestratorStatus()
+        context.SetCustomStatus(new OrchestratorStatus()
         {
           Index = i,
           Count = input.Values.Count,
           Progress = input.Values.Count == 0 ? 0f : ((float)i / (float)input.Values.Count) * 100f
-        };
-        context.SetCustomStatus(status);
-
-        var deadline = context.CurrentUtcDateTime.Add(TimeSpan.FromMicroseconds(100));
-        await context.CreateTimer(deadline, CancellationToken.None);
+        });
       }
 
-      var status = new OrchestratorStatus()
+      context.SetCustomStatus(new OrchestratorStatus()
       {
         Index = input.Values.Count,
         Count = input.Values.Count,
         Progress = 100f
-      };
-      context.SetCustomStatus(status);
+      });
 
       return outputs;
     }
 
     [Function(nameof(Iterator_Work))]
-    public string Iterator_Work([ActivityTrigger] OrchestratorChuck chunk, FunctionContext context)
+    public async Task<string> Iterator_Work([ActivityTrigger] OrchestratorChuck chunk, FunctionContext context)
     {
       var logger = context.GetLogger(nameof(Iterator_Work));
 
@@ -109,8 +104,10 @@ namespace WhiteCrow
         ChatMessage.CreateSystemMessage(chunk.Instructions),
         ChatMessage.CreateUserMessage(chunk.Value)
       };
-      ChatCompletion response = this.client.CompleteChat(messages, cancellationToken: context.CancellationToken);
+      ChatCompletion response = await this.client.CompleteChatAsync(messages, cancellationToken: context.CancellationToken);
       var result = response.Content.FirstOrDefault()?.Text ?? string.Empty;
+
+      await Task.Delay(100);
 
       return result;
     }
