@@ -88,6 +88,14 @@ namespace WhiteCrow
         await context.CreateTimer(deadline, CancellationToken.None);
       }
 
+      var status = new OrchestratorStatus()
+      {
+        Index = input.Values.Count,
+        Count = input.Values.Count,
+        Progress = 100f
+      };
+      context.SetCustomStatus(status);
+
       return outputs;
     }
 
