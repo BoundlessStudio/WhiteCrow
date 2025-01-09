@@ -11,13 +11,27 @@ var host = new HostBuilder()
         {
           Rules =
           [
+            // Anonymous-10/Day
             new ThrottlingTrollRule
             {
               UriPattern = "/api/Iterator_Start",
-              LimitMethod = new FixedWindowRateLimitMethod
+              LimitMethod = new SlidingWindowRateLimitMethod
               {
                 PermitLimit = 10,
-                IntervalInSeconds = 3600,
+                IntervalInSeconds = 86400,
+                NumOfBuckets = 3
+              },
+            },
+            // Authorized-100/Day
+            new ThrottlingTrollRule
+            {
+              UriPattern = "/api/Iterator_Start",
+              HeaderName = "Authorization",
+              LimitMethod = new SlidingWindowRateLimitMethod
+              {
+                PermitLimit = 100,
+                IntervalInSeconds = 86400,
+                NumOfBuckets = 3,
               }
             }
           ]

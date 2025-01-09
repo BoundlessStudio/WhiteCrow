@@ -101,6 +101,7 @@ namespace WhiteCrow
 
       var messages = new List<ChatMessage>()
       {
+        //ChatMessage.CreateSystemMessage(),
         ChatMessage.CreateSystemMessage(chunk.Instructions),
         ChatMessage.CreateUserMessage(chunk.Value)
       };
