@@ -31,8 +31,8 @@ var host = new HostBuilder()
     })
     .ConfigureServices(services =>
     {
-      services.AddApplicationInsightsTelemetryWorkerService();
-      services.ConfigureFunctionsApplicationInsights();
+      //services.AddApplicationInsightsTelemetryWorkerService();
+      //services.ConfigureFunctionsApplicationInsights();
       services.AddSingleton(new ChatClient(model: "gpt-4o", apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")));
     })
     .Build();
