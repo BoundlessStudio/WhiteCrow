@@ -5,9 +5,14 @@
     <OutputType>Exe</OutputType>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <UserSecretsId>31f771ee-8eb4-4d2f-9130-4e1a9e148b6c</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Ical.Net" Version="4.3.1" />
+    <PackageReference Include="itext7" Version="9.0.0" />
+    <PackageReference Include="Markdig" Version="0.40.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.11" />
     <!-- Application Insights isn't enabled by default. See https://aka.ms/AAt8mw4. -->
     <!-- <PackageReference Include="Microsoft.ApplicationInsights.WorkerService" Version="2.22.0" /> -->
     <!-- <PackageReference Include="Microsoft.Azure.Functions.Worker.ApplicationInsights" Version="2.0.0" /> -->
@@ -15,8 +20,11 @@
     <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.DurableTask" Version="1.1.7" />
     <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http" Version="3.2.0" />
     <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http.AspNetCore" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Storage.Blobs" Version="6.6.0" />
     <PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk" Version="2.0.0" />
+    <PackageReference Include="NPOI" Version="2.7.2" />
     <PackageReference Include="OpenAI" Version="2.1.0" />
+    <PackageReference Include="ReverseMarkdown" Version="4.6.0" />
     <PackageReference Include="ThrottlingTroll.AzureFunctionsAspNet" Version="7.3.0" />
   </ItemGroup>
   <ItemGroup>
